@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/tahseen0amin/Dropbox/Youtube Tutorial/part 3/Tut/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="8f11f56e350eacabf2273f646d981356eea0ed77">
+        <dex dex="/Users/tahseen0amin/Dropbox/Youtube Tutorial/part 3/Tut/app/build/intermediates/pre-dexed/debug/classes-2c58133f8afd878ab1c12530324c3e1458362828.jar" />
+    </item>
+    <item
+        jar="/Users/tahseen0amin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="/Users/tahseen0amin/Dropbox/Youtube Tutorial/part 3/Tut/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-d5cf5f0cde8f6ba642e315704bc48ee11398bbfb.jar" />
+    </item>
+
+</items>
