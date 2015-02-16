@@ -76,6 +76,19 @@
                 android:src="@drawable/ic_launcher"/>
         </TableRow>
 
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Image"
+                android:id="@+id/changeImage"
+                android:layout_span="2" />
+        </TableRow>
 
 
     </TableLayout>
