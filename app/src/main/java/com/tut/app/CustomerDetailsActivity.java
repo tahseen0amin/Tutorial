@@ -77,14 +77,14 @@ public class CustomerDetailsActivity extends Activity {
             new GetCustomerDetails().execute(new ApiConnector());
         }
 
-        // Change Image
+        // Change Image Button
         this.changeImageButton = (Button) this.findViewById(R.id.changeImage);
 
+        // add OnClick listener
         this.changeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Toast.makeText(CustomerDetailsActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+                // open gallery
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -101,7 +101,6 @@ public class CustomerDetailsActivity extends Activity {
         protected JSONArray doInBackground(ApiConnector... params) {
 
             // it is executed on Background thread
-
             return params[0].GetCustomerDetails(CustomerID);
         }
 
@@ -144,6 +143,7 @@ public class CustomerDetailsActivity extends Activity {
         params.add(new BasicNameValuePair("CustomerID", idOfCustomer));
         params.add(new BasicNameValuePair("image", imageData));
 
+        // start AsyncTask to post image to server
         new AsyncTask<ApiConnector,Long,Boolean>(){
 
             @Override
@@ -159,6 +159,7 @@ public class CustomerDetailsActivity extends Activity {
         }.execute(new ApiConnector());
     }
 
+    // encode Bitmap Image to String.
     public static String encodeTobase64(Bitmap image)
     {
         System.gc();
@@ -176,6 +177,7 @@ public class CustomerDetailsActivity extends Activity {
         return imageEncoded;
     }
 
+    // will be called when activity finish its task
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {

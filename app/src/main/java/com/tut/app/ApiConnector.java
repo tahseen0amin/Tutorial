@@ -139,9 +139,18 @@ public class ApiConnector {
         return jsonArray;
     }
 
+    /**
+     * Upload Image to server
+     *
+     * @param params list of variables to be sent
+     * @return true if successful or false
+     *
+     */
     public boolean UploadImageToServer(List<NameValuePair> params) {
 
+        // Url where your uploadImage.php is stored
         String url = "http://192.168.0.9/php/uploadImage.php";
+
         HttpEntity httpEntity = null;
         Log.e("Post Params", params.toString());
 
@@ -149,6 +158,7 @@ public class ApiConnector {
         try {
             // defaultHttpClient
             DefaultHttpClient httpClient = new DefaultHttpClient();
+            // HttpPost as it is POST request
             HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(new UrlEncodedFormEntity(params));
 
@@ -156,7 +166,8 @@ public class ApiConnector {
             httpEntity = httpResponse.getEntity();
 
             String entityResponse = EntityUtils.toString(httpEntity);
-            Log.e("Entity Response", entityResponse);
+            Log.e("Entity Response", entityResponse); // check Log entry in logCat to see errors if present
+
             return true;
 
         } catch (UnsupportedEncodingException e) {
@@ -166,6 +177,7 @@ public class ApiConnector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // if it reaches here, that means it has failed to execute, hence return false
         return false;
     }
 }
