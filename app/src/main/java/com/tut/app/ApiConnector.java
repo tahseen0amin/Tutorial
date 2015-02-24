@@ -22,7 +22,7 @@ public class ApiConnector {
     public JSONArray GetAllCustomers()
     {
         // URL for getting all customers
-        String url = "http://192.168.0.9/php/getAllCustomers.php";
+        String url = "http://192.168.0.2/php/getAllCustomers.php";
 
         // Get HttpResponse Object from url.
         // Get HttpEntity from Http Response Object
@@ -81,7 +81,7 @@ public class ApiConnector {
     public JSONArray GetCustomerDetails(int CustomerID)
     {
         // URL for getting all customers
-        String url = "http://192.168.0.9/php/getCustomer.php?CustomerID="+CustomerID;
+        String url = "http://192.168.0.2/php/getCustomer.php?CustomerID="+CustomerID;
 
         // Get HttpResponse Object from url.
         // Get HttpEntity from Http Response Object
