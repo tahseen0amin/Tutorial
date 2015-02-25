@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,14 +26,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDetailsActivity extends Activity {
 
@@ -48,6 +54,7 @@ public class CustomerDetailsActivity extends Activity {
     private static final String baseUrlForImage = "http://192.168.0.2/php/images/";
     private Button changeImageButton;
     private static final int SELECT_PICTURE = 1;
+    private String idOfCustomer;
 
 
     @Override
@@ -113,8 +120,37 @@ public class CustomerDetailsActivity extends Activity {
     private void SetImage(Bitmap image) {
         this.picture.setImageBitmap(image);
 
-        // upload 
+        // upload
+        String imageData = encodeTobase64(image);
+        final List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("image", imageData));
+        params.add(new BasicNameValuePair("CustomerID", idOfCustomer));
+
+        new AsyncTask<ApiConnector,Long, Boolean >() {
+            @Override
+            protected Boolean doInBackground(ApiConnector... apiConnectors) {
+                return apiConnectors[0].uploadImageToserver(params);
+            }
+        }.execute(new ApiConnector());
+
     }
+
+    public static String encodeTobase64(Bitmap image) {
+        System.gc();
+
+        if (image == null)return null;
+
+        Bitmap immagex = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+        byte[] b = baos.toByteArray();
+
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT); // min minSdkVersion 8
+
+        return imageEncoded;
+    }
+
 
     public String getPath(Uri uri) {
         if( uri == null ) {
@@ -155,7 +191,7 @@ public class CustomerDetailsActivity extends Activity {
 
                 String urlForImage = baseUrlForImage + customer.getString("imageName");
                 new DownloadImageTask(picture).execute(urlForImage);
-
+                idOfCustomer = customer.getString("id");
             }
             catch (Exception e)
             {
